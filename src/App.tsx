@@ -1,11 +1,7 @@
 export default function App() {
   return (
-    <div className="flex min-h-screen w-full items-center justify-center bg-background text-foreground">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Template Ready</h1>
-        <p className="text-muted-foreground">
-          Your project structure is set up with Vite, Tailwind CSS v4, and all dependencies.
-        </p>
+    <div className="flex min-h-screen items-start justify-center bg-gray-100">
+      <div className="flex w-full flex-col bg-amber-200 md:max-w-2xl">
       </div>
     </div>
   );
