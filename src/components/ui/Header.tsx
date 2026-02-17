@@ -10,7 +10,7 @@ export default function Header() {
 
   return (
     <header className="flex flex-col items-start gap-3 rounded-t-3xl bg-gradient-to-r from-blue-500 to-green-500 p-8 text-white">
-      <h1 className="flex items-center gap-3 text-3xl font-medium ">
+      <h1 className="flex items-center gap-3 text-3xl font-medium">
         <Users className="size-8" />
         Sunday Prayer Tracker
       </h1>
