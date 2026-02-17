@@ -3,6 +3,7 @@ import { X } from 'lucide-react';
 type StudentListProps = {
   students: string[];
   title: string;
+  color: string;
   onClose: () => void;
   onSelect: (student: string) => void;
 };
@@ -10,12 +11,15 @@ type StudentListProps = {
 export default function StudentList({
   students,
   title,
+  color,
   onClose,
   onSelect,
 }: StudentListProps) {
   return (
-    <div className="flex flex-col w-full">
-      <div className="flex w-full items-center justify-between rounded-t-3xl bg-gray-600 bg-gradient-to-r from-green-400 to-green-600 px-8 py-4 text-white">
+    <div className="flex w-full flex-col">
+      <div
+        className={`flex w-full items-center justify-between rounded-t-3xl px-8 py-4 text-white ${color}`}
+      >
         <h2 className="text-xl font-semibold">{title}</h2>
         <button
           title="Close"
@@ -25,7 +29,7 @@ export default function StudentList({
           <X size={20} />
         </button>
       </div>
-      <div className="px-4 pb-4 flex max-h-96 flex-col gap-2 overflow-y-auto bg-white py-4">
+      <div className="flex max-h-96 flex-col gap-2 overflow-y-auto bg-white px-4 py-4 pb-4">
         {students.map((student) => {
           return (
             <button

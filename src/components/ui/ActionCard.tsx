@@ -1,10 +1,10 @@
-import { LucideIcon } from 'lucide-react';
-import { ChevronDown } from 'lucide-react';
+import { LucideIcon, ChevronDown } from 'lucide-react';
+import { GREEN_GRADIENT, BLUE_GRADIENT } from '../../styles/constants';
 
 type ActionCardProps = {
   title: string;
   icon: LucideIcon;
-  variant: 'blue' | 'green';
+  variant?: 'blue' | 'green';
   onClick: () => void;
 };
 
@@ -15,8 +15,8 @@ export default function ActionCard({
   onClick,
 }: ActionCardProps) {
   const variants = {
-    blue: 'bg-gradient-to-r from-blue-400 to-blue-600 text-white',
-    green: 'bg-gradient-to-r from-green-400 to-green-600 text-white',
+    blue: BLUE_GRADIENT,
+    green: GREEN_GRADIENT,
   };
   return (
     <button
