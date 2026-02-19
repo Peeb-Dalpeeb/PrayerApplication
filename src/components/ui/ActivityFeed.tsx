@@ -7,13 +7,13 @@ type ActivityFeedProps = {
 
 export default function ActivityFeed({ history }: ActivityFeedProps) {
   return (
-    <div className="mt-5 flex flex-col flex-1 min-h-0 gap-4 rounded-xl bg-white px-8 py-6 shadow-lg">
+    <div className="mt-5 flex min-h-0 flex-1 flex-col gap-4 rounded-xl bg-white px-8 py-6 shadow-lg">
       <div className="flex items-center gap-2">
         <History />
         <h2 className="text-1xl font-semibold">Recent Activity</h2>
       </div>
 
-      <div className="flex-1 flex  flex-col gap-2 overflow-y-auto pr-2">
+      <div className="flex flex-1 flex-col gap-2 overflow-y-auto pr-2">
         {history.length === 0 && <div>No activity yet.</div>}
         {history.map((record) => (
           <div
