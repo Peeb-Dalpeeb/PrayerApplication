@@ -29,7 +29,7 @@ export default function StudentList({
           <X size={20} />
         </button>
       </div>
-      <div className="flex max-h-96 flex-col gap-2 overflow-y-auto bg-white px-4 py-4 pb-4">
+      <div className="flex max-h-96 flex-col gap-2 overflow-y-auto bg-white px-4 py-4 pb-4 ">
         {students.map((student) => {
           return (
             <button
