@@ -119,7 +119,7 @@ export default function App() {
                 'Eden Gore',
                 'Indie Palomino',
                 'Grace Strickland',
-                'Malikey Homer',
+                'Malikye Homer',
                 'Danielle KeKolani',
               ]}
               title={
