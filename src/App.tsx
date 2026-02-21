@@ -74,19 +74,24 @@ export default function App() {
 
   if (!isServerAwake) {
     return (
-      <div className="flex h-screen w-full items-center justify-center flex-col gap-4 bg-gray-100 px-4 text-center">
-        <h2 className='text-2xl font-bold text-blue-600'>Server is not awake</h2>
-        <p className="text-xl font-bold text-gray-500">Because we are on a free server, this first load may take 45 seconds to wake up the backend.</p>
+      <div className="flex h-screen w-full flex-col items-center justify-center gap-4 bg-gray-100 px-4 text-center">
+        <h2 className="text-2xl font-bold text-blue-600">
+          Server is not awake
+        </h2>
+        <p className="text-xl font-bold text-gray-500">
+          Because we are on a free server, this first load may take 45 seconds
+          to wake up the backend.
+        </p>
       </div>
     );
   }
 
   return (
     <div className="flex min-h-screen items-start justify-center bg-gray-100">
-      <div className="flex h-screen w-full flex-col gap-3 md:max-w-2xl">
+      <div className="flex h-screen w-full flex-col md:max-w-2xl">
         <Header />
 
-        <div className="flex min-h-0 w-full flex-1 flex-col gap-6 px-4 pb-4 md:px-0">
+        <div className="relative z-10 -mt-4 flex min-h-0 w-full flex-1 flex-col gap-2 px-4 pb-2 md:px-0">
           <ActionCard
             title="Who Spun the Wheel?"
             icon={RotateCw}
