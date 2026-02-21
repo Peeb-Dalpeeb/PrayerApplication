@@ -8,7 +8,7 @@ type ActivityFeedProps = {
 
 export default function ActivityFeed({ history, onDelete }: ActivityFeedProps) {
   return (
-    <div className="mt-2 flex min-h-0 flex-1 flex-col gap-4 rounded-xl bg-white px-8 py-6 shadow-lg">
+    <div className="mt-2 flex min-h-0 flex-1 flex-col gap-4 rounded-xl bg-white px-8 py-6 shadow-sm">
       <div className="flex items-center gap-2">
         <History />
         <h2 className="text-1xl font-semibold">Recent Activity</h2>
