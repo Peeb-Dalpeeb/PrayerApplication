@@ -109,7 +109,7 @@ export default function App() {
       </div>
 
       {selectionState !== 'null' && (
-        <div className="fixed inset-0 flex items-end justify-center">
+        <div className="fixed inset-0 z-50 flex items-end justify-center">
           <div
             className="absolute inset-0 bg-black/50"
             onClick={() => setSelectionState('null')}
