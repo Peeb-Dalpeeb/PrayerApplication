@@ -18,7 +18,9 @@ export default function App() {
     try {
       // 1. Tell the Backend to delete it from MongoDB
       // We send the specific ID in the URL
-      await axios.delete(`http://localhost:5000/api/activities/${idToRemove}`);
+      await axios.delete(
+        `https://prayerapplication-backend.onrender.com/api/activities/${idToRemove}`
+      );
 
       // 2. Only if the backend succeeds, remove it from the screen
       setHistory((prevHistory) =>
@@ -33,7 +35,7 @@ export default function App() {
     const loadData = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:5000/api/activities'
+          'https://prayerapplication-backend.onrender.com/api/activities'
         );
         setHistory(response.data);
       } catch (error) {
@@ -55,7 +57,10 @@ export default function App() {
 
     try {
       // This sends the data over the bridge to your Backend
-      await axios.post('http://localhost:5000/api/activities', newRecord);
+      await axios.post(
+        'https://prayerapplication-backend.onrender.com/api/activities',
+        newRecord
+      );
 
       // This updates the list you see on the screen
       setHistory((prev) => [newRecord, ...prev]);
