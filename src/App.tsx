@@ -1,11 +1,12 @@
 import Header from './components/ui/Header';
 import ActionCard from './components/ui/ActionCard';
 import { RotateCw, Heart } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import StudentList from './components/ui/StudentList';
 import { GREEN_GRADIENT, BLUE_GRADIENT } from './styles/constants';
 import { ActivityRecord } from './types/types';
 import ActivityFeed from './components/ui/ActivityFeed';
+import axios from 'axios';
 
 export default function App() {
   const [selectionState, setSelectionState] = useState<
@@ -13,16 +14,55 @@ export default function App() {
   >('null');
   const [history, setHistory] = useState<ActivityRecord[]>([]);
 
-  const addRecord = (studentName: string) => {
+  const deleteRecord = async (idToRemove: string) => {
+    try {
+      // 1. Tell the Backend to delete it from MongoDB
+      // We send the specific ID in the URL
+      await axios.delete(`http://localhost:5000/api/activities/${idToRemove}`);
+
+      // 2. Only if the backend succeeds, remove it from the screen
+      setHistory((prevHistory) =>
+        prevHistory.filter((record) => record.id !== idToRemove)
+      );
+    } catch (error) {
+      console.error('Failed to delete record from database:', error);
+      alert('Could not delete record. Is the backend running?');
+    }
+  };
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const response = await axios.get(
+          'http://localhost:5000/api/activities'
+        );
+        setHistory(response.data);
+      } catch (error) {
+        console.error('Failed to load history from database', error);
+      }
+    };
+    loadData();
+  }, []); // This [] ensures it only runs once when the page opens
+
+  const addRecord = async (studentName: string) => {
     if (selectionState === 'null') return;
+
     const newRecord: ActivityRecord = {
       id: crypto.randomUUID(),
-      student: studentName,
+      student: studentName, // Mapping studentName to the 'student' key
       action: selectionState as 'spinner' | 'prayer',
       timestamp: new Date(),
     };
-    setHistory((prevHistory) => [newRecord, ...prevHistory]);
-    setSelectionState('null');
+
+    try {
+      // This sends the data over the bridge to your Backend
+      await axios.post('http://localhost:5000/api/activities', newRecord);
+
+      // This updates the list you see on the screen
+      setHistory((prev) => [newRecord, ...prev]);
+    } catch (error) {
+      console.error('Failed to save to database:', error);
+      alert("Check your backend! The record couldn't be saved to MongoDB.");
+    }
   };
 
   return (
@@ -43,7 +83,7 @@ export default function App() {
             variant="green"
             onClick={() => setSelectionState('prayer')}
           />
-          <ActivityFeed history={history} />
+          <ActivityFeed history={history} onDelete={deleteRecord} />
         </div>
       </div>
 
@@ -72,7 +112,10 @@ export default function App() {
                   : 'Who Prayed Today?'
               }
               onClose={() => setSelectionState('null')}
-              onSelect={addRecord}
+              onSelect={(student) => {
+                addRecord(student);
+                setSelectionState('null');
+              }}
               color={
                 selectionState === 'spinner' ? BLUE_GRADIENT : GREEN_GRADIENT
               }
