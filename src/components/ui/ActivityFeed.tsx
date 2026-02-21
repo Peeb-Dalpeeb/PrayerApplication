@@ -8,13 +8,13 @@ type ActivityFeedProps = {
 
 export default function ActivityFeed({ history, onDelete }: ActivityFeedProps) {
   return (
-    <div className="mt-2 flex min-h-0 flex-1 flex-col gap-4 rounded-xl bg-white px-8 py-6 shadow-sm">
+    <div className="mt-2 flex min-h-0 flex-1 flex-col gap-4 rounded-xl bg-white px-4 py-6 shadow-sm">
       <div className="flex items-center gap-2">
         <History />
         <h2 className="text-1xl font-semibold">Recent Activity</h2>
       </div>
 
-      <div className="flex flex-1 flex-col gap-2 overflow-y-auto pr-2">
+      <div className="flex flex-1 flex-col gap-2 overflow-y-auto">
         {history.length === 0 && <div>No activity yet.</div>}
         {history.map((record) => (
           <div
@@ -31,7 +31,7 @@ export default function ActivityFeed({ history, onDelete }: ActivityFeedProps) {
             <span className="flex flex-col">
               <span className="font-semibold">{record.student}</span>
               <span className="text-sm opacity-60">
-                {record.action === 'spinner' ? 'Spun' : 'Prayed'} on{' '}
+                {record.action === 'spinner' ? 'Spun' : 'Prayed'}{' '}
                 {new Date(record.timestamp).toLocaleDateString('en-US', {
                   month: 'short',
                   day: 'numeric',
