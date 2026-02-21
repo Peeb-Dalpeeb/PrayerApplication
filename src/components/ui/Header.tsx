@@ -12,7 +12,7 @@ export default function Header() {
     <header className="flex flex-col items-start gap-3 rounded-t-3xl bg-gradient-to-r from-blue-500 to-green-500 p-8 text-white">
       <h1 className="flex items-center gap-3 text-3xl font-medium">
         <Users className="size-8" />
-        Sunday Prayer Tracker
+        Prayer Tracker
       </h1>
       <p className="flex items-center gap-3 text-sm opacity-90">
         <Calendar className="size-4" />

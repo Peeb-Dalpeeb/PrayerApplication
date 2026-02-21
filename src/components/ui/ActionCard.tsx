@@ -21,7 +21,7 @@ export default function ActionCard({
   return (
     <button
       onClick={onClick}
-      className={`flex w-full items-center gap-6 rounded-xl px-8 py-6 text-white shadow-lg transition-transform active:scale-95 ${variants[variant]}`}
+      className={`flex w-full items-center gap-2 rounded-xl px-4 py-6 text-white shadow-lg transition-transform active:scale-95 ${variants[variant]}`}
     >
       <div className="flex size-10 items-center justify-center rounded-lg bg-white/20">
         <Icon strokeWidth={2.5} />

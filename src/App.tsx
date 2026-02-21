@@ -13,6 +13,7 @@ export default function App() {
     'spinner' | 'prayer' | 'null'
   >('null');
   const [history, setHistory] = useState<ActivityRecord[]>([]);
+  const [isServerAwake, setIsServerAwake] = useState(false);
 
   const deleteRecord = async (idToRemove: string) => {
     try {
@@ -38,6 +39,7 @@ export default function App() {
           'https://prayerapplication-backend.onrender.com/api/activities'
         );
         setHistory(response.data);
+        setIsServerAwake(true);
       } catch (error) {
         console.error('Failed to load history from database', error);
       }
@@ -70,6 +72,15 @@ export default function App() {
     }
   };
 
+  if (!isServerAwake) {
+    return (
+      <div className="flex h-screen w-full items-center justify-center flex-col gap-4 bg-gray-100 px-4 text-center">
+        <h2 className='text-2xl font-bold text-blue-600'>Server is not awake</h2>
+        <p className="text-xl font-bold text-gray-500">Because we are on a free server, this first load may take 45 seconds to wake up the backend.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="flex min-h-screen items-start justify-center bg-gray-100">
       <div className="flex h-screen w-full flex-col gap-3 md:max-w-2xl">
@@ -77,13 +88,13 @@ export default function App() {
 
         <div className="flex min-h-0 w-full flex-1 flex-col gap-6 px-4 pb-4 md:px-0">
           <ActionCard
-            title="Who Spun the Wheel Today?"
+            title="Who Spun the Wheel?"
             icon={RotateCw}
             variant="blue"
             onClick={() => setSelectionState('spinner')}
           />
           <ActionCard
-            title="Who Prayed Today?"
+            title="Who Prayed?"
             icon={Heart}
             variant="green"
             onClick={() => setSelectionState('prayer')}
@@ -113,8 +124,8 @@ export default function App() {
               ]}
               title={
                 selectionState === 'spinner'
-                  ? 'Who Spun the Wheel Today?'
-                  : 'Who Prayed Today?'
+                  ? 'Who Spun the Wheel?'
+                  : 'Who Prayed?'
               }
               onClose={() => setSelectionState('null')}
               onSelect={(student) => {
