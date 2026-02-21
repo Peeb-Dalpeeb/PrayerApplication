@@ -87,8 +87,8 @@ export default function App() {
   }
 
   return (
-    <div className="flex min-h-screen items-start justify-center bg-gray-100">
-      <div className="flex h-screen w-full flex-col md:max-w-2xl">
+    <div className="flex min-h-[100dvh] items-start justify-center bg-gray-100">
+      <div className="flex h-[100dvh] w-full flex-col md:max-w-2xl">
         <Header />
 
         <div className="relative z-10 -mt-4 flex min-h-0 w-full flex-1 flex-col gap-2 px-4 pb-2 md:px-0">
