@@ -1,5 +1,5 @@
 import { ActivityRecord } from '@/types/types';
-import { RotateCw, Heart, History } from 'lucide-react';
+import { RotateCw, Heart, History, Trash2 } from 'lucide-react';
 
 type ActivityFeedProps = {
   history: ActivityRecord[];
@@ -30,16 +30,20 @@ export default function ActivityFeed({ history }: ActivityFeedProps) {
             <span className="flex flex-col">
               <span className="font-semibold">{record.student}</span>
               <span className="text-sm opacity-60">
-                {record.action === 'spinner' ? 'Spun the Wheel' : 'Prayed'}
+                {record.action === 'spinner' ? 'Spun' : 'Prayed'} on{' '}
+                {record.timestamp.toLocaleString([], {
+                  month: 'short',
+                  day: 'numeric',
+                  year: 'numeric',
+                })}
               </span>
             </span>
-            <span className="ml-auto text-sm opacity-60">
-              {record.timestamp.toLocaleString([], {
-                month: 'short',
-                day: 'numeric',
-                year: 'numeric',
-              })}
-            </span>
+            <button
+              title="Delete activity"
+              className="ml-auto rounded-lg bg-red-100 p-3"
+            >
+              <Trash2 className="ml-auto size-6 text-red-400" />
+            </button>
           </div>
         ))}
       </div>
