@@ -7,6 +7,7 @@ import { GREEN_GRADIENT, BLUE_GRADIENT } from './styles/constants';
 import { ActivityRecord } from './types/types';
 import ActivityFeed from './components/ui/ActivityFeed';
 import axios from 'axios';
+import CatchTheHeartsGame from './components/ui/CatchTheHeartsGame';
 
 export default function App() {
   const [selectionState, setSelectionState] = useState<
@@ -16,6 +17,7 @@ export default function App() {
   const [isServerAwake, setIsServerAwake] = useState(false);
 
   const deleteRecord = async (idToRemove: string) => {
+    const timer = setTimeout(() => setIsServerAwake(false), 1500);
     try {
       // 1. Tell the Backend to delete it from MongoDB
       // We send the specific ID in the URL
@@ -30,18 +32,24 @@ export default function App() {
     } catch (error) {
       console.error('Failed to delete record from database:', error);
       alert('Could not delete record. Is the backend running?');
+    } finally {
+      clearTimeout(timer);
+      setIsServerAwake(true);
     }
   };
   useEffect(() => {
     const loadData = async () => {
+      const timer = setTimeout(() => setIsServerAwake(false), 1500);
       try {
         const response = await axios.get(
           'https://prayerapplication-backend.onrender.com/api/activities'
         );
         setHistory(response.data);
-        setIsServerAwake(true);
       } catch (error) {
         console.error('Failed to load history from database', error);
+      } finally {
+        clearTimeout(timer);
+        setIsServerAwake(true);
       }
     };
     loadData();
@@ -57,6 +65,7 @@ export default function App() {
       timestamp: new Date(),
     };
 
+    const timer = setTimeout(() => setIsServerAwake(false), 1500);
     try {
       // This sends the data over the bridge to your Backend
       await axios.post(
@@ -69,21 +78,18 @@ export default function App() {
     } catch (error) {
       console.error('Failed to save to database:', error);
       alert("Check your backend! The record couldn't be saved to MongoDB.");
+    } finally {
+      clearTimeout(timer);
+      setIsServerAwake(true);
     }
   };
 
-  if (!isServerAwake) {
-    return (
-      <div className="flex h-screen w-full flex-col items-center justify-center gap-4 bg-gray-100 px-4 text-center">
-        <h2 className="text-2xl font-bold text-blue-600">
-          Server is not awake
-        </h2>
-        <p className="text-xl font-bold text-gray-500">
-          Because we are on a free server, this first load may take 45 seconds
-          to wake up the backend.
-        </p>
-      </div>
-    );
+  // Add ?debug=true to your URL to test the game even if the server is awake!
+  // Example: http://localhost:5173/?debug=true
+  const isDebug = new URLSearchParams(window.location.search).get('debug') === 'true';
+
+  if (isDebug || !isServerAwake) {
+    return <CatchTheHeartsGame />;
   }
 
   return (
@@ -126,6 +132,9 @@ export default function App() {
                 'Grace Strickland',
                 'Malikye Homer',
                 'Danielle KeKolani',
+                'Eliza Espino',
+                'Brother Dalpias',
+                'Brother Gittins'
               ]}
               title={
                 selectionState === 'spinner'
