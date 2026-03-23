@@ -98,7 +98,7 @@ export default function CatchTheHeartsGame() {
       color,
       size: Math.random() * 8 + 6,
     }));
-    
+
     setParticles((prev) => [...prev, ...newParticles]);
   };
 
