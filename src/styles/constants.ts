@@ -3,3 +3,15 @@ export const GREEN_GRADIENT =
 
 export const BLUE_GRADIENT =
   'bg-gradient-to-r from-blue-400 to-blue-600 text-white';
+
+export const STUDENTS = [
+  'Marcus Hammond',
+  'Finn Beath',
+  'Jack Frischknecht',
+  'Eden Gore',
+  'Indie Palomino',
+  'Grace Strickland',
+  'Malikye Homer',
+  'Danielle KeKolani',
+  'Eliza Espino',
+];

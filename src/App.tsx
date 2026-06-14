@@ -3,11 +3,12 @@ import ActionCard from './components/ui/ActionCard';
 import { RotateCw, Heart } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import StudentList from './components/ui/StudentList';
-import { GREEN_GRADIENT, BLUE_GRADIENT } from './styles/constants';
+import { GREEN_GRADIENT, BLUE_GRADIENT, STUDENTS } from './styles/constants';
 import { ActivityRecord } from './types/types';
-import ActivityFeed from './components/ui/ActivityFeed';
+import TurnTracker from './components/ui/TurnTracker';
 import axios from 'axios';
 import CatchTheHeartsGame from './components/ui/CatchTheHeartsGame';
+import RollReminder from './components/ui/RollReminder';
 
 export default function App() {
   const [selectionState, setSelectionState] = useState<
@@ -110,7 +111,8 @@ export default function App() {
             variant="green"
             onClick={() => setSelectionState('prayer')}
           />
-          <ActivityFeed history={history} onDelete={deleteRecord} />
+          <RollReminder />
+          <TurnTracker history={history} onDelete={deleteRecord} />
         </div>
       </div>
 
@@ -123,19 +125,7 @@ export default function App() {
 
           <div className="relative flex w-full md:max-w-2xl">
             <StudentList
-              students={[
-                'Marcus Hammond',
-                'Finn Beath',
-                'Jack Frischknecht',
-                'Eden Gore',
-                'Indie Palomino',
-                'Grace Strickland',
-                'Malikye Homer',
-                'Danielle KeKolani',
-                'Eliza Espino',
-                'Brother Dalpias',
-                'Brother Gittins'
-              ]}
+              students={STUDENTS}
               title={
                 selectionState === 'spinner'
                   ? 'Who Spun the Wheel?'
