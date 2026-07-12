@@ -14,4 +14,7 @@ export const STUDENTS = [
   'Malikye Homer',
   'Danielle KeKolani',
   'Eliza Espino',
+  'Bailey Post',
+  'Mathew Beath',
+  'Caroline Post',
 ];
